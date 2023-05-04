@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -28,7 +29,8 @@ import lombok.NoArgsConstructor;
 public class MaintTiming {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "maint_seq")
+    @SequenceGenerator(name = "maint_seq", sequenceName = "MAINT_SEQ", allocationSize = 1)
 	private long id;
 	@Column(name = Constants.START_TIME, nullable = false, columnDefinition = "TIME(0)")
 	@Temporal(TemporalType.TIME)
